@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+    h1 Page Not Found
+    h2 Status Code: #{error.status}
+    p #{error.message}
+    br
+    p
+    a.button(href='/') Home
