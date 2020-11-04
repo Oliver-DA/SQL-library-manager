@@ -3,19 +3,28 @@ extends ../layout
 block content
   h1 Books
   p
-    a.button(href='/books/new') Create New Book     
-    table
-      thead
-        tr
-          th Title
-          th Author
-          th Genre
-          th Year
-      tbody
-        each book in books    
+    a.button(href='/books/new') Create New Book
+    a.button(href="/") Re-load Books
+
+    form.search(action = "/books" method = "POST")
+      input(name = "query" type='text' placeholder = "Title, author, year etc..." value = query)
+      button.button(type="submit") Search
+
+    include ../no-searchs-found
+
+    if books.length > 0
+      table
+        thead
           tr
-            td
-              a(href=`/books/${book.id}`)= book.title
-            td= book.author
-            td= book.genre
-            td= book.year
+            th Title
+            th Author
+            th Genre
+            th Year
+        tbody
+          each book in books    
+            tr
+              td
+                a(href=`/books/${book.id}`)= book.title
+              td= book.author
+              td= book.genre
+              td= book.year

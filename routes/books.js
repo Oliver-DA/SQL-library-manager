@@ -4,15 +4,19 @@ var router = express.Router();
 const {
   asyncHandler,
   findAllBooks,
+  searchBooks,
   renderNewView,
   postNewBook,
   renderEditView,
   updateBook,
-  deleteBook
+  deleteBook,
 } = require("../dataBaseFunctions")
 
 //Retrives all the books from the database.
 router.get("/", asyncHandler(findAllBooks))
+
+//Retrives books based on a search
+router.post("/", asyncHandler(searchBooks))
 
 //Renders the new-book template.
 router.get("/new", renderNewView)
