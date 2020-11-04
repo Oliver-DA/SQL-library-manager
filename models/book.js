@@ -5,13 +5,14 @@ module.exports = (sequelize, DataTypes) => {
   class Book extends Model {} ;
 
   Book.init({
+
     title: {
       type: DataTypes.STRING,
       allowNull: false,
        
       validate: {
         notEmpty: {
-          ms: "Please provide a title"
+          msg: "Please provide a title"
         }
       }
     },
