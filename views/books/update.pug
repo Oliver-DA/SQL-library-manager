@@ -1,0 +1,13 @@
+extends ../layout 
+
+block content 
+    h1= title
+
+    include errors
+
+    form(action=`/books/${book.id}`, method = "POST")
+        include form
+        p
+            input(type='submit' value='Update Book')
+        
+    include ../deleteForm

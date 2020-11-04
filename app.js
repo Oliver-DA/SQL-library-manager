@@ -3,11 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var { sequelize } = require("./models")
 
+//Added modules
+const { sequelize } = require("./models")
+const { pageNotFoundError, globalError } = require("./errorHandlers");
+//////
 
-
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes');
 var booksRouter = require('./routes/books');
 
 var app = express();
@@ -36,25 +38,10 @@ app.use("/public",express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/books', booksRouter);
 
-// catch 404 and forward to error handler
-app.use( function(req, res) {
+// 404 Page not found error handler
+app.use(pageNotFoundError);
 
-  const error = new Error()
-  error.message = "Sorry seems that this is not the book you are looking for :("
-  error.status = 404;
-  res.render("page-not-found", { error })
-
-});
-
-// error handler
-app.use(function(error, req, res, next) {
-  // set locals, only providing error in development
-  error.message = error.message || "Something went wrong with the server"
-
-  // render the error page
-  error.status = error.status || 500;
-
-  res.render('error', { error });
-});
+// Global error handler
+app.use(globalError);
 
 module.exports = app;

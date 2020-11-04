@@ -9,12 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-       
+      
       validate: {
         notEmpty: {
           msg: "Please provide a title"
         }
       }
+
     },
 
     author: {
@@ -28,9 +29,34 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
 
-    genre: DataTypes.STRING,
+    genre: {
+      type:DataTypes.STRING,
 
-    year: DataTypes.INTEGER
+      validate: {
+        notEmpty: {
+          msg: "Please provide a genre"
+        }
+      }
+    },
+
+    year: {
+      type: DataTypes.INTEGER,
+
+      validate: {
+        notEmpty: {
+          msg: "Please provide a year"
+        }, 
+
+        min: {
+          args:"1",
+          msg: "The year needs to be greather or equal to 1"
+        },
+
+        isNumeric: {
+          msg: "The value for year needs to be numeric"
+        }
+      } 
+    }
 
   }, { sequelize });
 
