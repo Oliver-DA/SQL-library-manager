@@ -6,7 +6,7 @@ block content
     a.button(href='/books/new') Create New Book
     a.button(href="/") Re-load Books
 
-    form.search(action = "/books" method = "POST")
+    form.search(action = "/books/search" method = "POST")
       input(name = "query" type='text' placeholder = "Title, author, year etc..." value = query)
       button.button(type="submit") Search
 
@@ -24,7 +24,13 @@ block content
           each book in books    
             tr
               td
-                a(href=`/books/${book.id}`)= book.title
+                a(href=`/books/edit/${book.id}`)= book.title
               td= book.author
               td= book.genre
               td= book.year
+    .pagination-buttons
+      if pages 
+        -var i = 1;
+        while i <= pages
+          a.button(href = "/books/pagination/" + i)= i
+          -i++

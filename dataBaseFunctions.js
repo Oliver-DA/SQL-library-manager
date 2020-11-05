@@ -14,6 +14,18 @@ const asyncHandler = (cb) => {
   }
 }
 
+//Pagination
+const pagination = async (req, res) => {
+
+  const currentPage = req.params.page
+  const offset = (currentPage - 1) * 7
+  const {count, rows} = await Book.findAndCountAll({ offset, limit: 7});
+  const pages = Math.ceil( count / 7 );
+ 
+  res.render("books/index", {books: rows,pages }) 
+}
+
+//Search for books
 const searchBooks = async (req, res) => {
   const query = req.body.query || req.cookies.userQuery;
 
@@ -56,18 +68,22 @@ const searchBooks = async (req, res) => {
 
 }
 
+//Find All Books
 const findAllBooks = async (req, res) => {
 
   res.clearCookie("userQuery");
-  const books = await Book.findAll({ order: [["year", "ASC"]]});
-  res.render("books/index", { books });
+  const {count, rows} = await Book.findAndCountAll({offset:0, limit:7 });
+  const pages = Math.ceil(count / 7);
+  res.render("books/index", { books:rows, pages});
 
 }
 
+//Render the template to create a new book
 const renderNewView = (req, res) => {
-  res.render("books/new", { book: {} , title: "New Book"})
+  res.render("books/new-book", { book: {} , title: "New Book"})
 }
 
+//creating a new book
 const postNewBook = async (req, res) => {
   let book;
 
@@ -81,7 +97,7 @@ const postNewBook = async (req, res) => {
     if (error.name == "SequelizeValidationError") {
 
       book = await Book.build(req.body);
-      res.render("books/new", { book, errors: error.errors, title: "New Book"})
+      res.render("books/new-book", { book, errors: error.errors, title: "New Book"})
       
     } else {
       throw error
@@ -90,13 +106,14 @@ const postNewBook = async (req, res) => {
 
 }
 
+//Render the template to edit a book
 const renderEditView = async (req, res, next) => {
   const { id } = req.params;
 
   const book = await Book.findByPk(id);
 
   if (book) {
-    res.render("books/update", { book, title: "Update Book"})
+    res.render("books/update-book", { book, title: "Update Book"})
 
   } else {
     next(generate404(id))
@@ -104,6 +121,7 @@ const renderEditView = async (req, res, next) => {
     
 }
 
+//Updating a book
 const updateBook = async (req, res, next) => {
   const { id } = req.params;
 
@@ -124,7 +142,7 @@ const updateBook = async (req, res, next) => {
     if (error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
       book.id = req.params.id;
-      res.render("books/update", { book, errors:error.errors, title: "Update Book"})
+      res.render("books/update-book", { book, errors:error.errors, title: "Update Book"})
 
     } else {
       throw error
@@ -132,6 +150,7 @@ const updateBook = async (req, res, next) => {
   }
 }
 
+//Deletgin a book
 const deleteBook = async (req, res) => {
   const { id } = req.params;
   const book = await Book.findByPk(req.params.id);
@@ -155,4 +174,5 @@ module.exports =
   renderEditView,
   updateBook,
   deleteBook,
+  pagination
 } 

@@ -3,9 +3,9 @@ extends ../layout
 block content 
     h1= title
 
-    include errors
+    include book-errors
 
-    form(action=`/books/${book.id}`, method = "POST")
+    form(action=`/books/edit/${book.id}`, method = "POST")
         include form
         p
             input(type='submit' value='Update Book')
