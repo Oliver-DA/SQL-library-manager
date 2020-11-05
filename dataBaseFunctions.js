@@ -17,16 +17,21 @@ const asyncHandler = (cb) => {
 //Pagination
 const pagination = async (req, res) => {
 
+  //Gets the current page where the user is 
   const currentPage = req.params.page
-  const offset = (currentPage - 1) * 7
-  const {count, rows} = await Book.findAndCountAll({ offset, limit: 7});
+  const offset = ( currentPage - 1 ) * 7
+  //Retrives 7 books starting from the value of offset.
+  const { count, rows } = await Book.findAndCountAll({ offset, limit: 7 });
   const pages = Math.ceil( count / 7 );
- 
-  res.render("books/index", {books: rows,pages }) 
+
+  res.render("books/index", {books: rows, pages }) 
+
 }
 
 //Search for books
 const searchBooks = async (req, res) => {
+
+  //Query is the value inserted in the text field for search
   const query = req.body.query || req.cookies.userQuery;
 
   if (query) {
@@ -56,13 +61,13 @@ const searchBooks = async (req, res) => {
 
         ]
       },
+      //Returns the books in ascendent order by their year
       order:[["year", "ASC"]]
     });
-
+    
     res.render("books/index", { books: searchedBooks, query });
     
   } else {
-
     findAllBooks(req, res);
   }
 
@@ -71,9 +76,13 @@ const searchBooks = async (req, res) => {
 //Find All Books
 const findAllBooks = async (req, res) => {
 
+  //Clear the cookie with the name userQuery used for the search.
   res.clearCookie("userQuery");
-  const {count, rows} = await Book.findAndCountAll({offset:0, limit:7 });
+  //retrives the first 7 boos from the dataBase and stores them in rows
+  const { count, rows } = await Book.findAndCountAll({offset:0, limit:7 });
+  //Set the pages to the total numbers of books (count) / 7
   const pages = Math.ceil(count / 7);
+
   res.render("books/index", { books:rows, pages});
 
 }
@@ -95,7 +104,8 @@ const postNewBook = async (req, res) => {
   } catch (error) {
 
     if (error.name == "SequelizeValidationError") {
-
+      //If there's a sequelize error use Book.build()
+      //to keep the values of the form and pass the errors to the template 
       book = await Book.build(req.body);
       res.render("books/new-book", { book, errors: error.errors, title: "New Book"})
       
@@ -108,14 +118,15 @@ const postNewBook = async (req, res) => {
 
 //Render the template to edit a book
 const renderEditView = async (req, res, next) => {
-  const { id } = req.params;
 
+  const { id } = req.params;
   const book = await Book.findByPk(id);
 
   if (book) {
     res.render("books/update-book", { book, title: "Update Book"})
 
   } else {
+    //Error generator for books that could not be found.
     next(generate404(id))
   }
     
@@ -123,8 +134,8 @@ const renderEditView = async (req, res, next) => {
 
 //Updating a book
 const updateBook = async (req, res, next) => {
-  const { id } = req.params;
 
+  const { id } = req.params;
   book = await Book.findByPk(id);
 
   try {
@@ -152,6 +163,7 @@ const updateBook = async (req, res, next) => {
 
 //Deletgin a book
 const deleteBook = async (req, res) => {
+
   const { id } = req.params;
   const book = await Book.findByPk(req.params.id);
 
@@ -163,7 +175,7 @@ const deleteBook = async (req, res) => {
     generate404(id)
   }
 }
-
+//exporting all the function to be use in ./routes/books.js
 module.exports = 
 {
   asyncHandler,

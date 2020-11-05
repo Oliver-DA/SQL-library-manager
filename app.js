@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//Added modules
+//Added modules//
 const { sequelize } = require("./models")
 const { pageNotFoundError, globalError } = require("./errorHandlers");
 //////

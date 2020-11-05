@@ -16,25 +16,25 @@ const {
 //Testionng pagination not yet finished
 router.get("/pagination/:page", asyncHandler(pagination))
 
-//Retrives all the books from the database.
+//Retrives all the books from the database and displays pagination buttons
 router.get("/", asyncHandler(findAllBooks))
 
-//Retrives books based on a search
+//Retrives books based on a search.
 router.post("/search", asyncHandler(searchBooks))
 
 //Renders the new-book template.
 router.get("/new", renderNewView)
 
-//Post (creates) a new book to the data base
+//Post or creates a new book to the data base.
 router.post("/new", asyncHandler(postNewBook))
 
-//Renders the template to edit a book based on id
+//Renders the template to edit a book based on id.
 router.get("/:id", asyncHandler(renderEditView))
 
-//update a book based on id
+//Update a book based on id.
 router.post("/:id", asyncHandler(updateBook))
 
-//Delet a book based on id
+//Deletes a book based on id.
 router.post("/:id/delete", asyncHandler(deleteBook))
 
 module.exports = router;
