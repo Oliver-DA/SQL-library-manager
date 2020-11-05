@@ -29,10 +29,10 @@ router.get("/new", renderNewView)
 router.post("/new", asyncHandler(postNewBook))
 
 //Renders the template to edit a book based on id
-router.get("/edit/:id", asyncHandler(renderEditView))
+router.get("/:id", asyncHandler(renderEditView))
 
 //update a book based on id
-router.post("/edit/:id", asyncHandler(updateBook))
+router.post("/:id", asyncHandler(updateBook))
 
 //Delet a book based on id
 router.post("/:id/delete", asyncHandler(deleteBook))

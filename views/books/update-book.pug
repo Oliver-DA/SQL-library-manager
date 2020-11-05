@@ -5,7 +5,7 @@ block content
 
     include book-errors
 
-    form(action=`/books/edit/${book.id}`, method = "POST")
+    form(action=`/books/${book.id}`, method = "POST")
         include form
         p
             input(type='submit' value='Update Book')
