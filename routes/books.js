@@ -13,7 +13,7 @@ const {
   pagination
 } = require("../dataBaseFunctions")
 
-//Testionng pagination not yet finished
+//Paignation route
 router.get("/pagination/:page", asyncHandler(pagination))
 
 //Retrives all the books from the database and displays pagination buttons

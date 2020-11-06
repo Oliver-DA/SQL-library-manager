@@ -18,13 +18,13 @@ const asyncHandler = (cb) => {
 const pagination = async (req, res) => {
 
   //Gets the current page where the user is 
-  const currentPage = req.params.page
-  const offset = ( currentPage - 1 ) * 7
+  const currentPage = req.params.page || 1;
+  const offset = ( currentPage - 1 ) * 7;
   //Retrives 7 books starting from the value of offset.
   const { count, rows } = await Book.findAndCountAll({ offset, limit: 7 });
   const pages = Math.ceil( count / 7 );
 
-  res.render("books/index", {books: rows, pages }) 
+  res.render("books/index", {books: rows, pages, currentPage}) 
 
 }
 
@@ -78,13 +78,8 @@ const findAllBooks = async (req, res) => {
 
   //Clear the cookie with the name userQuery used for the search.
   res.clearCookie("userQuery");
-  //retrives the first 7 boos from the dataBase and stores them in rows
-  const { count, rows } = await Book.findAndCountAll({offset:0, limit:7 });
-  //Set the pages to the total numbers of books (count) / 7
-  const pages = Math.ceil(count / 7);
-
-  res.render("books/index", { books:rows, pages});
-
+  pagination(req, res)
+  
 }
 
 //Render the template to create a new book

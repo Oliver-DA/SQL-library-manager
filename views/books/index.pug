@@ -32,5 +32,8 @@ block content
       if pages 
         -var i = 1;
         while i <= pages
-          a.button(href = "/books/pagination/" + i)= i
+          if currentPage == i 
+            a(href = "/books/pagination/" + i class = "button active")= i
+          else 
+            a(href = "/books/pagination/" + i class = "button")= i
           -i++
