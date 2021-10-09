@@ -1,13 +1,12 @@
 extends ../layout 
 
 block content 
-    h1= title
-
     include book-errors
-
-    form(action=`/books/${book.id}`, method = "POST")
-        include form
-        p
-            input(type='submit' value='Update Book')
-        
-    include ../deleteForm
+    div(class = "update-form")
+        h1(class = "new-title") Update or Delete
+        form(action=`/books/${book.id}`, method = "POST")
+            include form
+            div(class = "actions-field")
+                input(type='submit' value='Update Book')
+                a.button(href='/') Cancel
+        include ../deleteForm

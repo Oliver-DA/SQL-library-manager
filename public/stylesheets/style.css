@@ -1,48 +1,63 @@
+:root{
+  --Background: #16161a;
+  --Headline: #fffffe;
+  --Paragraph: #94a1b2;
+  --Button: #7f5af0;
+  --Stroke: #010101;
+  --Highlight: #7f5af0;
+  --Tertiary: #2cb67d;
+  --Main :#fffffe;
+  --Secondary: #72757e;
+}
+
 body {
-  padding: 10px 50px 50px;
-  font: 18px "Garamond", serif;
-  background-color:#fff;
-}
+  background-color:var(--Background);
+  font-family: 'Roboto Slab', serif;
 
+}
 a {
-  color: rgba(0, 0, 0, .7);
+  color:var(--Main);
   text-decoration: none;
-  font-weight: bold;
+  letter-spacing: 1.2px;
+  transition: all .3s ease-in-out;
 }
 
-  a:hover {
-    color: #7c03bd;
-  }
+
+a:hover {
+  color: var(--Highlight);
+}
+
 
 a.button, input[type=submit] {
   color: white;
-  background: #7c03bd;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: var(--Button);
   padding: 10px 14px 12px;
-  font-size: 14px;
-  border-radius: 2px;
+  font-size: 15px;
+  border-radius: 50px;
+  margin: 0 15px 0 0;
   cursor: pointer;
-  margin-right: 20px;
+  font-family: 'Roboto Slab', serif;
 }
 
 form a.button, input[type=submit] {
-  margin-left: 140px;
-  background: #7c03bd;
+  background: var(--Button);
+  transition: all .3 ease-in-out;
 }
 
 input[type=submit] {
   border: 0;
+  transition: all .3s ease-in-out;
+}
+
+input[type=submit]:hover {
+  background-color: var(--Tertiary);
 }
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #c457ff;
+    background-color: var(--Tertiary);
   }
 
-p {
-  margin: 20px auto;
-  color: rgba(0, 0, 0, .7);
-  font-size: 20px;
-}
+
 
 ul {
   padding: 0;
@@ -51,42 +66,41 @@ ul {
   line-height: 1.3em;
 }
 
+li {
+  margin-bottom: 10px;
+}
+
 h1 {
-  color: rgba(0, 0, 0, .7);
-  border-left: 2px solid #c457ff;
-  padding-left: 10px;
   margin-top: 0;
 }
 
-h2 {
-  border-top: 2px solid #c457ff;
-  padding-top: 20px;
-}
 
 table {
-  margin-top: 20px;
-  border: 2px solid #f2daff;
-  border-radius: 6px;
+  width: 100%;
+  height: 600px;
+  border: 2px solid var(--Stroke);
   padding: 5px;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.7);
+  border-radius: 9px;
+  margin-top: 10px;
 }
 
 th {
-  color:rgba(0, 0, 0, 0.7);
-  border-bottom: 2px solid #c457ff;
+  color:var(--Main);
+  border-bottom: 2px solid var(--Highlight);
+  font-size: 18px;
+  letter-spacing: 1.2px;
+  font-family: 'Roboto Slab', serif;;
   text-align: left;
   padding: 5px 20px 5px 10px;
 }
 
-tr {
-  min-height: 50px;
-}
 
 tr:nth-child(2n) {
-  background: #f2daff;
+  background-color:rgb(104, 103, 103, .5);
 }
 
 td {
+  color: var(--Main);
   padding: 5px 20px 10px 5px;
 }
 
@@ -98,53 +112,195 @@ label {
 
 input {
   padding: 10px;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  border-color: #E7E7E7;
-  border: 1px solid #c457ff;
-  color: rgba(0, 0, 0, .7);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  color:var(--Main);
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--Tertiary);
+  background-color: rgba(82, 79, 79, 0.164);
+  width: 250px;
 }
 
-input[type=text] {
-  margin-left: 7px;
-  width: 300px;
+input:focus{
+  background-color:rgba(82, 79, 79, 0.39);
 }
+
+
 
 button{
-  background-color: #7c03bd;
+  background-color:var(--Button);
   border: none;
-  color: #fff;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  color: var(--Main);
+  transition: all .3s ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  background-color: #c457ff;
+  background-color: var(--Tertiary);
   
 }
+
+.error-title{
+  color: var(--Main);
+}
 .error {
-  color: rgb(236, 15, 15);
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  color: rgba(253, 69, 69, 0.979);
 }
 
 .search {
   display: flex;
-  
 }
 
 .pagination-buttons {
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  max-width: 600px;
+  margin: 20px 0 0 5px;
 }
+
 
 .pagination-buttons .active{
-  background: #c457ff;
+  background: var(--Tertiary);
 }
 
-form.search {
-  margin: 25px 0 10px -5px;
-  
+.title {
+  border: none;
+  color: var(--Headline);
+  font-size: 60px;
+  font-weight: bold;
+  position: relative;
 }
 
+.title::after {
+  position: absolute;
+  content: "";
+  width: 118px;
+  height: 3px;
+  left: 28.1%;
+  background-color: var(--Tertiary);
+  display: block;
+}
+
+.new-title {
+  border: none;
+  color: var(--Headline);
+  font-size: 50px;
+  font-weight: bold;
+  margin-left: 70px;
+}
+
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.main h1 {
+  text-align: center;
+}
+
+.main-header{
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.main-header form {
+  margin-left: 700px;
+}
+
+.field {
+  color: var(--Main);
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions-field {
+  display: flex;
+  align-items: center;
+  margin: 50px 250px 0 0;
+  justify-content: flex-end;
+}
+
+/*UPDATE FORM*/
+.update-form {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.update-form input[type="submit"]{
+  width: 17%;
+}
+
+.update-form .actions-field {
+  margin: 50px 275px 0 0;
+}
+
+.new-form {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+}
+.new-form input[type="text"] {
+  width: 30%;
+}
+
+.cancel-button {
+  color: white;
+  background: var(--Button);
+  padding: 10px 14px 12px;
+  font-size: 15px;
+  border-radius: 50px;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+.cancel-button:hover {
+  background-color: var(--Tertiary);
+  color: var(--Main);
+}
+
+.create-button{
+  width: 15%;
+}
+
+.delete-form input[type="submit"] {
+  position: absolute;
+  top: 22%;
+  right: 25%;
+  width: 40px;
+  height: 40px;
+  border:1px solid  rgba(253, 69, 69, 0.979);
+  background-color: inherit;
+  padding: 10px;
+  margin: 0;
+  font-weight: bold;
+  transition: all .3s ease-in-out;
+}
+
+.delete-form input[type="submit"]:hover {
+  background-color:  rgba(253, 69, 69, 0.979);
+}
+
+
+/*NOT FOUND*/
+.not-found {
+  position: absolute;
+  color: var(--Main);
+  font-size: 20px;
+  right: .3%;
+  top: 110%;
+}
+
+.not-found span {
+  color: rgba(253, 69, 69, 0.979);
+  font-size: 25px;
+}

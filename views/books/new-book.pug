@@ -1,13 +1,12 @@
 extends ../layout 
 
 block content 
-    h1= title
-
     include book-errors
+    div(class = "new-form")
+        h1(class = "new-title") New Book
 
-    form(action ="/books/new", method = "POST")
-        include form
-        p
-            input(type='submit' value='Create book')
-        p
-            a.button(href='/') Cancel
+        form(action ="/books/new", method = "POST")
+            include form
+            div(class = "actions-field")
+                input(class = "create-button" type='submit' value='Create book')
+                a.cancel-button(href='/') Cancel

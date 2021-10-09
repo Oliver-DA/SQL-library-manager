@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         isNumeric: {
-          msg: "The value for year needs to be numeric"
+          msg: "The value for year needs to be a number"
         }
       } 
     }

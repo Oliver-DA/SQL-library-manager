@@ -1,6 +1,6 @@
 if (errors)
     ul.error
-        h2 Oops we missed some information.
+        h1(class = "error-title") Oops we missed some information...
         each error in errors
-            li 
+            li
                 = "* " + error.message

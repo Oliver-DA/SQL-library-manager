@@ -84,7 +84,7 @@ const findAllBooks = async (req, res) => {
 
 //Render the template to create a new book
 const renderNewView = (req, res) => {
-  res.render("books/new-book", { book: {} , title: "New Book"})
+  res.render("books/new-book", { book: {}})
 }
 
 //creating a new book
