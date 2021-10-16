@@ -5,13 +5,13 @@ block content
     h1(class = "title") SQL Library Manager
     div(class = "main-header")
 
-      p
+      div
         a.button(href='/books/new') Create New Book
         a.button(href="/") Re-load Books
 
-        form.search(action = "/books/search" method = "POST")
-          input(name = "query" type='text' placeholder = "Title, author, year etc..." value = query)
-          button.button(type="submit") Search
+      form.search(action = "/books/search" method = "POST")
+        input(name = "query" type='text' placeholder = "Title, author, year etc..." value = query)
+        button.button(type="submit") Search
 
       include ../no-searchs-found
     div(class = "main-content")

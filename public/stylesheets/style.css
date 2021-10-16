@@ -76,12 +76,12 @@ h1 {
 
 
 table {
-  width: 100%;
+  width: 95%;
   height: 600px;
   border: 2px solid var(--Stroke);
   padding: 5px;
   border-radius: 9px;
-  margin-top: 10px;
+  margin-left: 10px;
 }
 
 th {
@@ -154,7 +154,7 @@ button:hover {
 }
 
 .pagination-buttons {
-  margin: 20px 0 0 5px;
+  margin: 20px 0 0 10px;
 }
 
 
@@ -168,14 +168,16 @@ button:hover {
   font-size: 60px;
   font-weight: bold;
   position: relative;
+  margin-bottom: 45px;
 }
 
 .title::after {
   position: absolute;
   content: "";
-  width: 118px;
+  width: 110px;
   height: 3px;
-  left: 28.1%;
+  top: 50%;
+  left: 15%;
   background-color: var(--Tertiary);
   display: block;
 }
@@ -199,14 +201,20 @@ button:hover {
 
 .main-header{
   display: flex;
+  flex-direction: column;
   align-items:center;
   justify-content: space-between;
   position: relative;
 }
 
-.main-header form {
-  margin-left: 700px;
+.main-content {
+  margin-bottom: 80px;
 }
+
+.main-header form {
+  margin: 60px 0 50px 0;
+}
+
 
 .field {
   color: var(--Main);
@@ -303,4 +311,35 @@ button:hover {
 .not-found span {
   color: rgba(253, 69, 69, 0.979);
   font-size: 25px;
+}
+
+@media(min-width: 600px) {
+  .title::after {
+    display: none;
+  }
+}
+
+@media(min-width: 1400px) {
+  .main-header {
+    flex-direction: row;
+  }
+
+  .main-content {
+    margin: 0;
+  }
+
+  .main-header form {
+    margin: 0;
+    margin-left: 700px;
+  }
+
+  .title::after {
+    display: block;
+    top: 100%;
+    left: 28.1%;
+  }
+  table {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
